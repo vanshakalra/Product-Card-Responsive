@@ -4,10 +4,11 @@ const BRANDS=["H&M","Pepe Jeans","H&M","Levis","Levis","Nike","Pepe Jeans","H&M"
 const SIZES=["XXS","XS","S","M","L","XL"];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const heart=l=>`<button class="heart" aria-pressed="false" aria-label="Add ${l} to wishlist"><span><svg width="13" height="12" viewBox="0 0 24 22"><path d="M12 20s-9-5.5-9-12.2A5 5 0 0112 5a5 5 0 019 2.8C21 14.5 12 20 12 20z"/></svg></span></button>`;
-const probe=k=>new Promise(r=>{const t=x=>{const i=new Image();i.onload=()=>r(`assets/${k}.${x}`);i.onerror=()=>x==="png"?t("jpg"):r(null);i.src=`assets/${k}.${x}`};t("png")});
+const EXT=["png","jpg","jpeg","webp","PNG","JPG","JPEG"];
+const probe=k=>new Promise(r=>{const t=n=>{if(n>=EXT.length)return r(null);const i=new Image(),u=`assets/${k}.${EXT[n]}`;i.onload=()=>r(u);i.onerror=()=>t(n+1);i.src=u};t(0)});
 Promise.all([1,2,3,4,5,6].map(probe)).then(a=>{const ok=a.filter(Boolean);render(ok.length?ok:[null]);initCarousels()});
 function render(photos){$("#grid").innerHTML=BRANDS.map((b,i)=>{const l=`${b} Men’s Cotton Sweatshirt`,src=photos[i%photos.length];
-const slides=src?`<div class="slide"><img src="${src}" alt="${l}"></div><div class="slide zoom"><img src="${src}" alt="${l}, close-up"></div>`:"";
+const slides=!src?`<div class="slide ph"><span>Photo coming soon</span></div>`:`<div class="slide"><img src="${src}" alt="${l}"></div><div class="slide zoom"><img src="${src}" alt="${l}, close-up"></div>`;
 return `<article class="card"><div class="media"><div class="track">${slides}</div>
 <div class="dots" aria-hidden="true"></div>${heart(l)}</div>
 <div class="info"><p class="name"><b>${b}</b><span>Men’s Cotton Sweatshirt</span></p><span class="tag">Limited stock</span>

@@ -34,6 +34,7 @@ a{color:inherit;text-decoration:none}
 .slide{position:relative;flex:none;width:100%;scroll-snap-align:center}
 .slide img{position:absolute;left:50%;bottom:-4%;transform:translateX(-50%);height:106%;width:auto;max-width:100%;object-fit:contain}
 .slide.zoom img{transform:translateX(-50%) scale(1.75);transform-origin:50% 30%}
+.slide.ph{display:grid;place-items:center;font-size:12px;color:#0006}
 .dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;pointer-events:none;transition:opacity .2s}
 .dots i{width:6px;height:6px;border-radius:50%;background:#0003;transition:background .2s,transform .2s}
 .dots i.on{background:var(--ink);transform:scale(1.25)}
@@ -97,4 +98,15 @@ a{color:inherit;text-decoration:none}
  .track{scrollbar-width:none}
 }
 @media(min-width:768px) and (max-width:1023px){.tool.srch{display:flex}}
+@media(hover:hover){
+ .card{transition:box-shadow .2s,transform .2s,border-color .2s}
+ .card:hover{box-shadow:0 8px 24px #0001;transform:translateY(-3px);border-color:#c9c9c9}
+ .cta:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+ .cta.added:hover{background:var(--green);border-color:var(--green)}
+ .row .heart:hover{background:#ececec}.media .heart:hover>span{transform:scale(1.12)}
+ .chip:not(.on):hover{border-color:var(--ink)}
+ .tool:hover{opacity:.65}.nav a:hover{text-decoration:underline;text-underline-offset:6px}
+ .size:not(:disabled):not([aria-checked=true]):hover{border-color:var(--ink)}
+ .done:not(:disabled):hover{background:#000}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
